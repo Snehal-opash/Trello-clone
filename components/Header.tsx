@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Avatar from "react-avatar";
 import logo from "../app/assests/Trello_logo.svg.png";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const Header = () => {
   const [board, searchString, setSearchString] = useBoardStore((state) => [
@@ -32,7 +33,7 @@ const Header = () => {
 
   return (
     <header>
-      <div className="flex flex-col md:flex-row items-center p-5 bg-gray-500/10 rounded-b-2xl  ">
+      <div className="flex flex-col md:flex-row items-center p-5  bg-gray-500/10 rounded-b-2xl  ">
         <div
           className={`gradient absolute top-0 left-0 w-full h-full
             -z-50
@@ -55,12 +56,12 @@ const Header = () => {
           alt="Trello Logo"
           width={300}
           height={100}
-          className="w-44 md:w-56 pb-10 md:pb-0 object-contain filter "
+          className="w-44 md:w-56 pb-10 md:pb-0 object-contain filter brightness-100 "
         />
 
         <div className="flex  items-center space-x-5 flex-1 justify-end w-full">
           {/* Search Box */}
-          <form className="flex items-center space-x-5 bg-white rounded-md p-2 shadow-md flex-1 md:flex-initial ">
+          <form className="flex items-center space-x-5 bg-white dark:bg-[#3B3B3B]  rounded-md p-2 shadow-md flex-1 md:flex-initial ">
             <MagnifyingGlassIcon className="h-6 w-6 text-gray-400" />
             <input
               type="text"
@@ -77,9 +78,10 @@ const Header = () => {
           {/* Avatar */}
           <Avatar round color="#0055D1" size="50" name="Snehal Prajapati" />
         </div>
+        <ThemeSwitcher />
       </div>
       <div className="flex items-center justify-center px-5 py-2 md:py-5">
-        <p className="flex items-center text-sm font-light p-5 pr-5 shadow-xl rounded-xl w-fit bg-white italic max-w-xl text-[#0055D1]">
+        <p className="flex items-center text-sm font-light p-5 pr-5 shadow-xl rounded-xl w-fit bg-white  dark:bg-gray italic max-w-xl text-[#0055D1]">
           <UserCircleIcon
             className={`inline-block h-10 w-10 mr-1 text-[#0055D1] ${
               loading && "animate-spin"

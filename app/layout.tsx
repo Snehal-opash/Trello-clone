@@ -1,8 +1,9 @@
 import Modal from "@/components/Modal";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
+import { Providers } from "./Provider";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head></head>
-      <body>
-        {children}
-        <Modal />
+      <body className={`${inter.className} bg-slate-50 dark:bg-[#0d1117] `}>
+        <Providers attribute="class" defaultTheme="system" enableSystem>
+          
+          <main>{children}</main>
+          <Modal />
+        </Providers>
       </body>
     </html>
   );

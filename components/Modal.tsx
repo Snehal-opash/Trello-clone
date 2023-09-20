@@ -70,10 +70,10 @@ function Modal() {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white dark:bg-[#676767] p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 pb-2"
+                  className="text-lg font-medium leading-6 text-gray-900 dark:text-white pb-2"
                 >
                   Add a Task
                 </Dialog.Title>
@@ -89,8 +89,7 @@ function Modal() {
                 </div>
                 <TaskTypedRadioGroup />
 
-                <div >
-
+                <div>
                   <button
                     type="button"
                     onClick={() => {
