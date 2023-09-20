@@ -38,19 +38,29 @@ function Column({ id, todos, index }: Props) {
         >
           <Droppable droppableId={id} type="card">
             {(provided, snapshot) => (
+              // <div
+              //   {...provided.droppableProps}
+              //   ref={provided.innerRef}
+              //   className={`p-2 rounded-2xl shadow-sm
+              //    ${
+              //      snapshot.isDraggingOver ? "bg-green-200" : "bg-white/50"
+              //    }
+              //   `}
+              // >
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className={`p-2 rounded-2xl shadow-sm 
-                 ${
-                   snapshot.isDraggingOver ? "bg-green-200" : "bg-white/50"
-                 }
-                `}
+                className={`p-2 rounded-2xl shadow-sm ${
+                  snapshot.isDraggingOver
+                    ? "bg-gradient-to-b from-green-200 to-green-300"
+                    : "bg-gradient-to-b from-white to-gray-100 dark:from-gray-700"
+                }`}
               >
-                <h2 className="flex justify-between font-bold text-xl p-2">
+                <h2 className="flex justify-between font-semibold text-2xl p-2">
                   {idToColumnText[id]}
-                  <span className="text-gray-500 bg-gray-200 rounded-full px-2 py-1 text-sm font-normal 
-                  dark:bg-gray-500 dark:text-[white]"
+                  <span
+                    className="text-gray-500 bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold 
+                  dark:bg-gray-500 dark:text-white"
                   >
                     {!searchString
                       ? todos.length
@@ -61,7 +71,7 @@ function Column({ id, todos, index }: Props) {
                         ).length}
                   </span>
                 </h2>
-                <div className="space-y-2">
+                <div className="space-y-4">
                   {todos.map((todo, index) => {
                     if (
                       searchString &&
@@ -90,10 +100,10 @@ function Column({ id, todos, index }: Props) {
                     );
                   })}
                   {provided.placeholder}
-                  <div className="flex items-end justify-end p-2">
+                  <div className="flex items-end justify-end p-4">
                     <button
                       onClick={handleAddTodo}
-                      className="text-green-500 hover:text-green-600"
+                      className="text-green-500 hover:text-green-600 focus:outline-none"
                     >
                       <PlusCircleIcon className="h-10 w-10" />
                     </button>

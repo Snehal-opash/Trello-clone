@@ -44,7 +44,7 @@ const Header = () => {
             max-h-[60vh]
             `}
         />
-       
+
         {/* <div
           className="absolute top-0 left-0 w-full h-full
           bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black
@@ -56,16 +56,16 @@ const Header = () => {
           alt="Trello Logo"
           width={300}
           height={100}
-          className="w-44 md:w-56 pb-10 md:pb-0 object-contain filter brightness-100 "
+          className="w-44 md:w-56 pb-10 md:pb-0 object-contain filter brightness-100  "
         />
 
         <div className="flex  items-center space-x-5 flex-1 justify-end w-full">
           {/* Search Box */}
-          <form className="flex items-center space-x-5 bg-white dark:bg-[#3B3B3B]  rounded-md p-2 shadow-md flex-1 md:flex-initial ">
+          <form className="flex items-center space-x-5 bg-white dark:bg-[#3B3B3B]  rounded-md p-2 shadow-md flex-1 md:flex-initial transition">
             <MagnifyingGlassIcon className="h-6 w-6 text-gray-400" />
             <input
               type="text"
-              className="flex-1 outline-none p-2"
+              className="flex-1 outline-none p-2 bg-transparent"
               placeholder="Serach"
               value={searchString}
               onChange={(e) => setSearchString(e.target.value)}
@@ -76,21 +76,26 @@ const Header = () => {
           </form>
 
           {/* Avatar */}
-          <Avatar round color="#0055D1" size="50" name="Snehal Prajapati" />
+          <Avatar
+            round
+            color="#0055D1"
+            size="50"
+            name="Snehal Prajapati"
+            className="h-12 w-12 border-2 border-blue-500"
+          />
         </div>
         <ThemeSwitcher />
       </div>
       <div className="flex items-center justify-center px-5 py-2 md:py-5">
-        <p className="flex items-center text-sm font-light p-5 pr-5 shadow-xl rounded-xl w-fit bg-white  dark:bg-gray italic max-w-xl text-[#0055D1]">
+        <p className="flex items-center text-sm font-light p-5 pr-5 shadow-xl rounded-xl w-fit bg-white dark:bg-gray italic max-w-xl text-[#0055D1]">
           <UserCircleIcon
             className={`inline-block h-10 w-10 mr-1 text-[#0055D1] ${
               loading && "animate-spin"
             }`}
           />
           {suggestion && !loading
-            ?
-             suggestion
-            : "GPT is summarising your tasks for the day..."}
+            ? suggestion
+            : "GPT is summarizing your tasks for the day..."}
         </p>
       </div>
     </header>
