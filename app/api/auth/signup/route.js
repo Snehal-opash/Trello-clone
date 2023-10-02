@@ -6,7 +6,6 @@ export async function POST(req) {
   await connectMongo();
 
   const { username, email, password } = await req.json();
-  console.log("Received data:", { username, email, password });
   if (!username || !email || !password) {
     return new Response(
       JSON.stringify({ message: "username and Password are required" }),
@@ -41,7 +40,6 @@ export async function POST(req) {
       password: hashpwd,
     });
 
-    console.log("New User Object:", newUser.email);
     return new Response(JSON.stringify(newUser), {
       status: 201,
       headers: {

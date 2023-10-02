@@ -44,7 +44,6 @@ const LoginPage = () => {
       callbackUrl: "/",
     });
 
-    console.log(res);
 
     if (!res?.error) {
       toast.success("Sign In Successful, Redirecting to home Page...");
