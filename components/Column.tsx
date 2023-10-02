@@ -3,6 +3,10 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import TodoCard from "./TodoCard";
 import { useBoardStore } from "@/store/BoardStore";
 import { useModalStore } from "@/store/ModalStore";
+import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 type Props = {
   id: TypedColumn;
@@ -21,11 +25,17 @@ function Column({ id, todos, index }: Props) {
     state.searchString,
     state.setNewTaskType,
   ]);
+
+  const { data: session } = useSession();
   const openModal = useModalStore((state) => state.openModal);
 
   const handleAddTodo = () => {
-    setNewTaskType(id);
-    openModal();
+    if (session) {
+      setNewTaskType(id);
+      openModal();
+    } else {
+      toast.error("Please log in to add a todo.");
+    }
   };
 
   return (

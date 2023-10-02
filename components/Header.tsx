@@ -8,8 +8,11 @@ import { useEffect, useState } from "react";
 import Avatar from "react-avatar";
 import logo from "../app/assests/Trello_logo.svg.png";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 
 const Header = () => {
+  const { data: session } = useSession();
   const [board, searchString, setSearchString] = useBoardStore((state) => [
     state.board,
     state.searchString,
@@ -33,7 +36,7 @@ const Header = () => {
 
   return (
     <header>
-      <div className="flex flex-col md:flex-row items-center p-5  bg-gray-500/10 rounded-b-2xl  ">
+      <div className="flex flex-col md:flex-row items-center p-5  bg-gray-500/10 rounded-b-2xl">
         <div
           className={`gradient absolute top-0 left-0 w-full h-full
             -z-50
@@ -44,19 +47,13 @@ const Header = () => {
             max-h-[60vh]
             `}
         />
-
-        {/* <div
-          className="absolute top-0 left-0 w-full h-full
-          bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black
-            -z-50
-            rounded-md"
-        /> */}
         <Image
           src={logo}
           alt="Trello Logo"
           width={300}
           height={100}
-          className="w-44 md:w-56 pb-10 md:pb-0 object-contain filter brightness-100  "
+          // className="w-44 md:w-56 pb-10 md:pb-0 object-contain filter brightness-100  "
+          className="w-44 md:w-56 pb-5 md:pb-0 object-contain filter brightness-100"
         />
 
         <div className="flex  items-center space-x-5 flex-1 justify-end w-full">
@@ -75,15 +72,50 @@ const Header = () => {
             </button>
           </form>
 
+          {/* Ternary operator for session */}
+
           {/* Avatar */}
-          <Avatar
-            round
-            color="#0055D1"
-            size="50"
-            name="Snehal Prajapati"
-            className="h-12 w-12 border-2 border-blue-500"
-          />
+         
         </div>
+        {/* {session && session.user ? (
+          <>
+            <button
+              onClick={() => signOut()}
+              className="text-red-600  hover:text-red-800 font-semibold px-3 py-2 border border-red-600 ease-in-out w-fit p-2 m-4 h-full rounded-full hover:scale-105 transition-transform duration-200 bg-blue-500 dark:bg-gray-900"
+            >
+              Sign Out
+            </button>
+          </>
+        ) : (
+          <button className=" hover:bg-blue-600 text-white font-semibold px-4 py-2 ease-in-out w-fit p-2 m-2 h-full rounded-full hover:scale-105 transition-transform duration-200 bg-blue-500 dark:bg-gray-900">
+            <Link href="/login">Login</Link>
+          </button>
+        )} */}
+        <div className="flex items-center space-x-5">
+            {/* Ternary operator for session */}
+            {session && session.user ? (
+              <>
+                {console.log("🚀 ~ file: Header.tsx:78 ~ Header ~ session:", session)}
+                {/* <Avatar
+                  round
+                  className="h-12 w-12 border-2 border-blue-500"
+                  color="#0055D1"
+                  size="50"
+                  name={session?.user?.name || " "}
+                /> */}
+                <button
+                  onClick={() => signOut()}
+                  className="text-white hover:text-red-800 font-semibold px-3 py-2 border border-red-600 ease-in-out w-fit p-2 m-4 h-full rounded-full hover:scale-105 transition-transform duration-200 bg-blue-500 dark:bg-gray-900"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              // <button className="hover:bg-blue-600 text-white font-semibold px-4 py-2 ease-in-out w-fit p-2 m-2 h-full rounded-full hover:scale-105 transition-transform duration-200 bg-blue-500 dark:bg-gray-900">
+              // </button>
+                <Link className="hover:bg-blue-600 text-white font-semibold px-4 py-2 ease-in-out w-fit p-2 m-2 h-full rounded-full hover:scale-105 transition-transform duration-200 bg-blue-500 dark:bg-gray-900" href="/login">Login</Link>
+            )}
+          </div>
         <ThemeSwitcher />
       </div>
       <div className="flex items-center justify-center px-5 py-2 md:py-5">
