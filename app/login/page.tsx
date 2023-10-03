@@ -130,7 +130,7 @@ const LoginPage = () => {
             >
               Sign in with Google{" "}
               <Image
-                className=" mix-blend-lighten "
+                className=""
                 alt="logo"
                 src={"/assets/googlelogo.png"}
                 width="20"

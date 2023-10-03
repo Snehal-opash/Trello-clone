@@ -40,8 +40,8 @@ const Register = () => {
       );
       const response = await fetch(
         // "http://localhost:3000/api/auth/signup",
-        // `/api/auth/signup`,
-         `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/signup`,
+        // `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/signup`,
+        `https://trello-clone-ruddy-gamma.vercel.app/api/auth/signup`,
         options
       );
       if (response.ok) {
