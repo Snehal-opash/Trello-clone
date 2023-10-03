@@ -9,13 +9,12 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { useFormik } from "formik";
 import registerSchema from "@/lib/registerValidate";
-import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react";
 import { useRouter, redirect } from "next/navigation";
 
 const Register = () => {
-
-  const { data: session } = useSession()
-  if(session) redirect("/")
+  const { data: session } = useSession();
+  if (session) redirect("/");
   const [show, setShow] = useState({ password: false, cpassword: true });
   const router = useRouter();
   const formik = useFormik({
@@ -35,9 +34,14 @@ const Register = () => {
       body: JSON.stringify(values),
     };
     try {
+      console.log(
+        "API URL:",
+        `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/signup`
+      );
       const response = await fetch(
         // "http://localhost:3000/api/auth/signup",
-       `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/signup`,
+        `/api/auth/signup`,
+        //  `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/signup`,
         options
       );
       if (response.ok) {
@@ -62,7 +66,9 @@ const Register = () => {
       </Head>
       <section className="w-3/4 mx-auto flex flex-col gap-10">
         <div className="title">
-          <h1 className="text-gray-800 dark:text-white text-4xl font-bold py-4">Register</h1>
+          <h1 className="text-gray-800 dark:text-white text-4xl font-bold py-4">
+            Register
+          </h1>
           <p className="text-3xl dark:text-white/60 font-semibold text-center text-gray-800 mb-4">
             Please Register your self
           </p>
