@@ -43,9 +43,9 @@ const Register = () => {
         `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/signup`
       );
       const response = await axios.post(
-        "http://localhost:3000/api/auth/signup",
+        // "http://localhost:3000/api/auth/signup",
         // `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/signup`,
-        // `https://trello-clone-ruddy-gamma.vercel.app/api/auth/signup`,
+        `https://trello-clone-ruddy-gamma.vercel.app/api/auth/signup`,
         values,
       );
 
