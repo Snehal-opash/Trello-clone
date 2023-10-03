@@ -56,11 +56,11 @@ const LoginPage = () => {
   }
   //  google Handler fn
   async function handleGoogleSignin() {
-    signIn("google", { callbackUrl: `${process.env.NEXT_PUBLIC_VERCEL_URL}` });
+    signIn("google", { callbackUrl: "http://localhost:3000" });
   }
 
   async function handleGithuSignin() {
-    signIn("github", { callbackUrl: `${process.env.NEXT_PUBLIC_VERCEL_URL}` });
+    signIn("github", { callbackUrl: "http://localhost:3000" });
   }
   const [show, setShow] = useState(false);
   return (
