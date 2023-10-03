@@ -44,6 +44,11 @@ const Register = () => {
         `https://trello-clone-ruddy-gamma.vercel.app/api/auth/signup`,
         options
       );
+
+      console.log(">>>>>>>>>>>>>",response);
+      
+
+
       if (response.ok) {
         toast.success(
           `New User with email:${values.email} Created, Redirecting to Login Page...`
