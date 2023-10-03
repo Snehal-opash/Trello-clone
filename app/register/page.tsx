@@ -36,7 +36,8 @@ const Register = () => {
     };
     try {
       const response = await fetch(
-        "http://localhost:3000/api/auth/signup",
+        // "http://localhost:3000/api/auth/signup",
+       `${process.env.VERCEL_URL}/api/auth/signup`,
         options
       );
       if (response.ok) {
