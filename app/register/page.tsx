@@ -40,7 +40,7 @@ const Register = () => {
       );
       const response = await fetch(
         // "http://localhost:3000/api/auth/signup",
-        `/api/auth/signup`,
+        `/app/api/auth/signup`,
         //  `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/signup`,
         options
       );
