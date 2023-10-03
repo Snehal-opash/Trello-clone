@@ -4,33 +4,34 @@ import bcrypt from "bcrypt";
 
 export async function POST(req) {
   await connectMongo();
+  
+  try {
+    const { username, email, password } = await req.json();
 
-  const { username, email, password } = await req.json();
-  if (!username || !email || !password) {
-    return new Response(
-      JSON.stringify({ message: "username and Password are required" }),
-      {
-        status: 400,
+    if (!username || !email || !password) {
+      return new Response(
+        JSON.stringify({ message: "username and Password are required" }),
+        {
+          status: 400,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+
+    // Check for duplicates
+    const duplicate = await User.findOne({ email });
+    if (duplicate) {
+      return new Response(JSON.stringify({ message: "Email already exists" }), {
+        status: 409,
         headers: {
           "Content-Type": "application/json",
         },
-      }
-    );
-  }
+      });
+    }
 
-  // Check for duplicates
-  const duplicate = await User.findOne({ email });
-  if (duplicate) {
-    return new Response(JSON.stringify({ message: "Email already exists" }), {
-      status: 409,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-
-  try {
-    // Encrypt the password
+    // Hash the password asynchronously
     const hashpwd = await bcrypt.hash(password, 10);
 
     // Create the new user
