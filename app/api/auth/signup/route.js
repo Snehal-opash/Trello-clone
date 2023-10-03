@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 
 export async function POST(req) {
   await connectMongo();
-  
+
   try {
     const { username, email, password } = await req.json();
 
@@ -15,6 +15,7 @@ export async function POST(req) {
           status: 400,
           headers: {
             "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
           },
         }
       );

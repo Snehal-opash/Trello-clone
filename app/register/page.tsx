@@ -30,7 +30,10 @@ const Register = () => {
   async function onSubmit(values: any) {
     const options = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify(values),
     };
     try {
@@ -45,9 +48,7 @@ const Register = () => {
         options
       );
 
-      console.log(">>>>>>>>>>>>>",response);
-      
-
+      console.log(">>>>>>>>>>>>>", response);
 
       if (response.ok) {
         toast.success(
