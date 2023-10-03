@@ -1,13 +1,22 @@
 import User from "@/model/Schema";
 import { connectMongo } from "@/lib/connectMongo";
 import bcrypt from "bcrypt";
+import Cors from 'cors';
+
+const corsOptions = {
+  origin: '*', // Replace '*' with your specific allowed origins or domains
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
 
 export async function POST(req) {
   await connectMongo();
-
+  
+  const corsMiddleware = Cors(corsOptions);
   try {
     const { username, email, password } = await req.json();
-
+    
     if (!username || !email || !password) {
       return new Response(
         JSON.stringify({ message: "username and Password are required" }),
@@ -20,6 +29,7 @@ export async function POST(req) {
         }
       );
     }
+      await corsMiddleware(req, res);
 
     // Check for duplicates
     const duplicate = await User.findOne({ email });
@@ -46,6 +56,7 @@ export async function POST(req) {
       status: 201,
       headers: {
         "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*',
       },
     });
   } catch (error) {
