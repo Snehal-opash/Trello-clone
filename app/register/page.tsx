@@ -38,30 +38,22 @@ const Register = () => {
       body: JSON.stringify(values),
     };
     try {
-      console.log(
-        "API URL:",
-        `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/signup`
+      const response = await fetch(
+        // "http://localhost:3000/api/auth/signup",
+        `api/auth/signup`,
+        options
       );
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/signup",
-        // `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/signup`,
-        // `https://trello-clone-ruddy-gamma.vercel.app/api/auth/signup`,
-        values,
-      );
-
-      console.log(">>>>>>>>>>>>>", response);
-
-      // if (response.ok) {
-      //   toast.success(
-      //     `New User with email:${values.email} Created, Redirecting to Login Page...`
-      //   );
-      //   setTimeout(() => {
-      //     router.push("/login");
-      //   }, 2000);
-      // } else {
-      //   const errorText = await response.text(); // Convert the response body to text
-      //   toast.error(`Error: ${errorText}`);
-      // }
+      if (response.ok) {
+        toast.success(
+          `New User with email:${values.email} Created, Redirecting to Login Page...`
+        );
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
+      } else {
+        const errorText = await response.text(); // Convert the response body to text
+        toast.error(`Error: ${errorText}`);
+      }
     } catch (error) {
       toast.error(`Error: ${error as string}`);
     }
